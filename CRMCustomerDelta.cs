@@ -1,0 +1,64 @@
+namespace CustomerApi.Models;
+
+public class CRMCustomerDelta
+{
+    public string CustomerAccount { get; set; }
+    public string DeliverySequence { get; set; }
+    public string? CustomerStatus { get; set; }
+    public string? CustomerStatusDesc { get; set; }
+    public string? CustomerName { get; set; }
+    public string? AddressLine1 { get; set; }
+    public string? AddressLine2 { get; set; }
+    public string? AddressLine3 { get; set; }
+    public string? AddressLine4 { get; set; }
+    public string? AddressLine5 { get; set; }
+    public string? PostCodePart1 { get; set; }
+    public string? PostCodePart2 { get; set; }
+    public string? PaymentTermsCode { get; set; }
+    public string? SecuritisedCode { get; set; }
+    public string? SegmentTopLevel { get; set; }
+    public string? SegmentBottomLevel { get; set; }
+    public string? SdmCode { get; set; }
+    public string? StatementAddressCode { get; set; }
+    public string? InvoiceAddressCode { get; set; }
+    public string? CustomerTelephone { get; set; }
+    public string? SpecialInstructions { get; set; }
+    public DateTime? DateAccountOpened { get; set; }
+    public string? WebsiteUrl { get; set; }
+    public string? PrimaryContact { get; set; }
+    public string? CustomerPricing { get; set; }
+    public string? PriceCode { get; set; }
+    public string? BusinessUnitCode { get; set; }
+    public string? TradeChannelCode { get; set; }
+    public string? TradingStatus { get; set; }
+    public string? CustomerClass { get; set; }
+    public int? DeliveryLeadTime { get; set; }
+    public string? ProofOfDeliveryReq { get; set; }
+    public string? InvoiceFlag { get; set; }
+    public string? OutletCode { get; set; }
+    public decimal? CreditLimit { get; set; }
+    public string? CreditLimitCode { get; set; }
+    public string? CreditController { get; set; }
+    public int? DebtDaysCreditLimit { get; set; }
+    public string? PaymentMethod { get; set; }
+    public string? TransportCentre { get; set; }
+    public string? DeliveryRoute { get; set; }
+    public string? DeliveryMonday { get; set; }
+    public string? DeliveryTuesday { get; set; }
+    public string? DeliveryWednesday { get; set; }
+    public string? DeliveryThursday { get; set; }
+    public string? DeliveryFriday { get; set; }
+    public string? DeliverySaturday { get; set; }
+    public string? DeliverySunday { get; set; }
+    public string? GeneralLedgerDebtorsControlAccountExtension { get; set; }
+    public string? PaymentTermsType { get; set; }
+    public int? PaymentTermsTermsDays { get; set; }
+    public int? PaymentTermsPeriodicRange { get; set; }
+    public string? CompanyRegistrationCode { get; set; }
+    public string? OeCustomer { get; set; }
+    public string? EqCustomer { get; set; }
+    public string? CsCustomer { get; set; }
+    public string? RowHash { get; set; }
+    public DateTime LoadTs { get; set; }
+    public byte ChangeCode { get; set; }
+}
