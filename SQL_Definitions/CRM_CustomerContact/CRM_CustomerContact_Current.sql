@@ -1,7 +1,7 @@
 USE [CRMIntegration]
 GO
 
-/****** Object:  Table [dbo].[CRM_CustomerContact_Current]    Script Date: 10/03/2026 13:23:57 ******/
+/****** Object:  Table [dbo].[CRM_CustomerContact_Current]    Script Date: 10/03/2026 16:51:58 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -23,7 +23,9 @@ CREATE TABLE [dbo].[CRM_CustomerContact_Current](
 	[phone_mobile] [varchar](50) NULL,
 	[email] [varchar](255) NULL,
 	[general_text1] [varchar](255) NULL,
-	[general_text2] [varchar](255) NULL
+	[general_text2] [varchar](255) NULL,
+	[row_hash] [varchar](64) NULL,
+	[load_ts] [datetime2](3) NULL
 ) ON [PRIMARY]
 GO
 

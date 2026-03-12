@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using CustomerApi.Data;
-using CustomerApi.Configuration;
+using CustomerApi.Models;
+using CustomerApi.Repositories;
 using CustomerApi.Services;
+using CustomerApi.Configuration;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +21,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddControllers();
 
-builder.Services.AddScoped<ICustomerDeltaRepository, CustomerDeltaRepository>();
+builder.Services.AddScoped<CsvExportService>();
+
+builder.Services.AddScoped<ICustomerDeltaRepository<CRMCustomerDelta>, CustomerDeltaRepository>();
+
+builder.Services.AddScoped<ICustomerDeltaRepository<CRMCustomerContactDelta>, CustomerContactDeltaRepository>();
 
 builder.Services.Configure<SftpSettings>(
     builder.Configuration.GetSection("SftpSettings"));

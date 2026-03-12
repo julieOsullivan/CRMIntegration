@@ -13,7 +13,26 @@ SELECT
     RTRIM(TRIM(T1.MBNB1A)) AS phone_mobile,
     RTRIM(TRIM(T1.EMIL1A)) AS email,
     RTRIM(TRIM(T1.GTX11A)) AS general_text1,
-    RTRIM(TRIM(T1.GTX21A)) AS general_text2
+    RTRIM(TRIM(T1.GTX21A)) AS general_text2,
+    HEX(
+        HASH(
+            VARCHAR(
+                COALESCE(RTRIM(TRIM(T1.CNTN1A)),'') ||
+                COALESCE(RTRIM(TRIM(T1.CNJT1A)),'') ||
+                COALESCE(RTRIM(TRIM(T1.CRNM1A)),'') ||
+                COALESCE(RTRIM(TRIM(T1.HMNB1A)),'') ||
+                COALESCE(RTRIM(TRIM(T1.PFNB1A)),'') ||
+                COALESCE(RTRIM(TRIM(T1.OFNB1A)),'') ||
+                COALESCE(RTRIM(TRIM(T1.MBNB1A)),'') ||
+                COALESCE(RTRIM(TRIM(T1.EMIL1A)),'') ||
+                COALESCE(RTRIM(TRIM(T1.GTX11A)),'') ||
+                COALESCE(RTRIM(TRIM(T1.GTX21A)),'')
+            )
+        )
+    ) AS ROW_HASH,
+
+    CURRENT_TIMESTAMP AS LOAD_TS
+
 FROM EDUT1F3.T1P1A T1
 WHERE T1.CONO1A='GK'
 AND T1.GLCO1A='GK'

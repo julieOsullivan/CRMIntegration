@@ -1,6 +1,9 @@
-using CustomerApi.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-public interface ICustomerDeltaRepository
+namespace CustomerApi.Repositories;
+
+public interface ICustomerDeltaRepository<T>
 {
-    Task<List<CRMCustomerDelta>> GetTodayDeltasAsync();
+    Task<List<T>> GetTodayDeltasAsync();
 }

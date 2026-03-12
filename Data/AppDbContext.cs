@@ -11,6 +11,7 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<CRMCustomerDelta> CRMCustomerDelta { get; set; }
+    public DbSet<CRMCustomerContactDelta> CRMCustomerContactDelta { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -85,5 +86,43 @@ public class AppDbContext : DbContext
             entity.Property(e => e.LoadTs).HasColumnName("LOAD_TS");
             entity.Property(e => e.ChangeCode).HasColumnName("CHANGE_CODE");
         });
+
+        modelBuilder.Entity<CRMCustomerContactDelta>(entity =>
+        {
+            entity.ToTable("CRM_CustomerContact_Delta", "dbo");
+
+            entity.HasKey(x => new
+            {
+                x.CompanyNumber,
+                x.CustomerAccount,
+                x.DeliverySequence,
+                x.ContactType,
+                x.ContactNumber,
+                x.LoadTs
+            });
+
+            entity.Property(e => e.CompanyNumber).HasColumnName("company_number");
+            entity.Property(e => e.CustomerAccount).HasColumnName("customer_account");
+            entity.Property(e => e.DeliverySequence).HasColumnName("delivery_sequence");
+            entity.Property(e => e.ContactType).HasColumnName("contact_type");
+            entity.Property(e => e.ContactNumber).HasColumnName("contact_number");
+
+            entity.Property(e => e.ContactName).HasColumnName("contact_name");
+            entity.Property(e => e.JobTitle).HasColumnName("job_title");
+            entity.Property(e => e.CorrespondenceName).HasColumnName("correspondence_name");
+
+            entity.Property(e => e.PhoneHome).HasColumnName("phone_home");
+            entity.Property(e => e.PhonePreferred).HasColumnName("phone_preferred");
+            entity.Property(e => e.PhoneOffice).HasColumnName("phone_office");
+            entity.Property(e => e.PhoneMobile).HasColumnName("phone_mobile");
+
+            entity.Property(e => e.Email).HasColumnName("email");
+            entity.Property(e => e.GeneralText1).HasColumnName("general_text1");
+            entity.Property(e => e.GeneralText2).HasColumnName("general_text2");
+
+            entity.Property(e => e.RowHash).HasColumnName("row_hash");
+            entity.Property(e => e.LoadTs).HasColumnName("load_ts");
+        });
+ 
     }
 }

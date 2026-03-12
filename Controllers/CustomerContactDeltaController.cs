@@ -2,21 +2,19 @@ using Microsoft.AspNetCore.Mvc;
 using CustomerApi.Models;
 using CustomerApi.Repositories;
 using CustomerApi.Services;
-using System;
-using System.IO;
 
 namespace CustomerApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CustomerDeltasController : ControllerBase
+public class CustomerContactDeltasController : ControllerBase
 {
-    private readonly ICustomerDeltaRepository<CRMCustomerDelta> _repository;
+    private readonly ICustomerDeltaRepository<CRMCustomerContactDelta> _repository;
     private readonly CsvExportService _csv;
     private readonly SftpService _sftp;
 
-    public CustomerDeltasController(
-        ICustomerDeltaRepository<CRMCustomerDelta> repository,
+    public CustomerContactDeltasController(
+        ICustomerDeltaRepository<CRMCustomerContactDelta> repository,
         CsvExportService csv,
         SftpService sftp)
     {
@@ -33,7 +31,7 @@ public class CustomerDeltasController : ControllerBase
         if (!deltas.Any())
             return Ok("No deltas found.");
 
-        var filePath = await _csv.WriteCsvAsync(deltas, "CustomerDelta");
+        var filePath = await _csv.WriteCsvAsync(deltas, "CustomerContactDelta");
 
         _sftp.UploadFile(filePath, Path.GetFileName(filePath));
 
