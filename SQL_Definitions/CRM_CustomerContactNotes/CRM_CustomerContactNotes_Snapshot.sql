@@ -1,11 +1,11 @@
-CREATE TABLE CRM_CustomerContactNote_Current (
-
-company_group VARCHAR(5),
-company_number VARCHAR(5),
-application VARCHAR(5),
-contact_reference VARCHAR(50),
-note_line_number INT,
-note_text VARCHAR(1024),
-row_hash CHAR(64),
-load_ts DATETIME2 NULL
+create table dbo.crm_customercontactnotes_snapshot (
+    company_number      varchar(5)  not null,
+    customer_account    varchar(20) not null,
+    delivery_sequence   varchar(10) not null,
+    contact_type        varchar(4)  null,
+    contact_number      int         not null,
+    note_line           int         not null,
+    note_text           varchar(36),     -- matches DB2
+    row_hash            char(32),
+    load_ts             datetime2(3)
 );

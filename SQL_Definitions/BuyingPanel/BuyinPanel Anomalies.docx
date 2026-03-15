@@ -1,0 +1,42 @@
+Buying Panel Extract – Field Exclusion Note (LOCD20)
+Summary
+During development of the Buying Panel extracted entities, the field LOCD20 was referenced in the architect’s original SQL specification.
+However, detailed investigation confirmed that LOCD20 does not exist in the Buying Panel source table (OEP20UX) in any of the available libraries.
+
+Findings
+A full system-wide column scan was performed across all accessible libraries.
+This confirmed:
+
+LOCD20 exists in multiple logistics, depot, warehouse, finance and route‑planning tables  
+(e.g., FAP20, DYP20, OEP20A, ROUTE1AUL, LIBIA, LIBIPD, AULT1F3, AULT2F3, etc.)
+
+LOCD20 does NOT exist in OEP20UX, which is the correct table for Buying Panel Extra List logic.
+
+The architect’s SQL appears to have mixed fields from OEP20A (logistics) with OEP20UX (Buying Panel).
+
+OEP20A and OEP20UX are different tables with different business purposes.
+
+Conclusion
+Because LOCD20 is a logistics location field and not part of the Buying Panel domain, and because it is not present in OEP20UX, the field has been excluded from the Buying Panel extract.
+
+Impact
+No loss of Buying Panel functionality
+
+No impact on rule/list/item logic
+
+No impact on customer eligibility
+
+Prevents incorrect joins and invalid DataStage metadata
+
+Ensures the extract reflects the true structure of the Buying Panel tables
+
+Recommendation
+If LOCD20 is required for a future enhancement, the business must confirm:
+
+Which table the field should come from (OEP20A, DYP20, FAP20, etc.)
+
+Whether it is actually part of the Buying Panel domain
+
+Which library contains the authoritative version of the required table
+
+Until that confirmation is provided, LOCD20 remains out of scope for the Buying Panel extract.

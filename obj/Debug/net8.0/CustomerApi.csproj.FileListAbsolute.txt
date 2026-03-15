@@ -141,3 +141,5 @@ C:\Development\CustomerApi\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjec
 C:\Development\CustomerApi\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Development\CustomerApi\bin\Debug\net8.0\Renci.SshNet.dll
 C:\Development\CustomerApi\obj\Debug\net8.0\CustomerApi.sourcelink.json
+C:\Development\CustomerApi\bin\Debug\net8.0\SampleCustomerContact.json
+C:\Development\CustomerApi\bin\Debug\net8.0\SampleCustomerPayload.json

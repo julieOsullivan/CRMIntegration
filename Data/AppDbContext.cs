@@ -12,6 +12,7 @@ public class AppDbContext : DbContext
 
     public DbSet<CRMCustomerDelta> CRMCustomerDelta { get; set; }
     public DbSet<CRMCustomerContactDelta> CRMCustomerContactDelta { get; set; }
+    public DbSet<CRMCustomerContactNotesDelta> CRMCustomerContactNotesDelta { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -123,6 +124,33 @@ public class AppDbContext : DbContext
             entity.Property(e => e.RowHash).HasColumnName("row_hash");
             entity.Property(e => e.LoadTs).HasColumnName("load_ts");
         });
+
+        modelBuilder.Entity<CRMCustomerContactNotesDelta>(entity =>
+        {
+            entity.ToTable("crm_customercontactnotes_delta", "dbo");
+
+            entity.HasKey(x => new
+            {
+                x.CompanyNumber,
+                x.CustomerAccount,
+                x.DeliverySequence,
+                x.ContactNumber,
+                x.NoteLine,
+                x.LoadTs
+            });
+
+            entity.Property(e => e.CompanyNumber).HasColumnName("company_number");
+            entity.Property(e => e.CustomerAccount).HasColumnName("customer_account");
+            entity.Property(e => e.DeliverySequence).HasColumnName("delivery_sequence");
+            entity.Property(e => e.ContactType).HasColumnName("contact_type");
+            entity.Property(e => e.ContactNumber).HasColumnName("contact_number");
+            entity.Property(e => e.NoteLine).HasColumnName("note_line");
+            entity.Property(e => e.NoteText).HasColumnName("note_text");
+            entity.Property(e => e.RowHash).HasColumnName("row_hash");
+            entity.Property(e => e.LoadTs).HasColumnName("load_ts");
+            entity.Property(e => e.ChangeCode).HasColumnName("change_code");
+        });
+
  
     }
 }

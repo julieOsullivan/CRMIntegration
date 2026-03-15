@@ -20,6 +20,7 @@ public class CustomerContactDeltaRepository
 
         return await _context.CRMCustomerContactDelta
             .Where(x => x.LoadTs >= todayStart && x.LoadTs < tomorrowStart)
+            .AsNoTracking()
             .ToListAsync();
     }
 }

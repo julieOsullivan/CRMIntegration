@@ -1,36 +1,12 @@
-USE [CRMIntegration]
-GO
-
-/****** Object:  Table [dbo].[CRM_CustomerContact_Delta]    Script Date: 10/03/2026 11:40:30 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[CRM_CustomerContact_Delta](
-	[company_number] [varchar](5) NOT NULL,
-	[customer_account] [varchar](8) NOT NULL,
-	[delivery_sequence] [varchar](3) NOT NULL,
-	[contact_type] [varchar](4) NOT NULL,
-	[contact_number] [int] NOT NULL,
-	[contact_name] [varchar](255) NULL,
-	[job_title] [varchar](255) NULL,
-	[correspondence_name] [varchar](255) NULL,
-	[phone_home] [varchar](50) NULL,
-	[phone_preferred] [varchar](50) NULL,
-	[phone_office] [varchar](50) NULL,
-	[phone_mobile] [varchar](50) NULL,
-	[email] [varchar](255) NULL,
-	[general_text1] [varchar](255) NULL,
-	[general_text2] [varchar](255) NULL,
-	[row_hash] [varchar](64) NOT NULL,
-	[Load_TS] [datetime] NOT NULL,
-	[change_code] [tinyint] NOT NULL
-) ON [PRIMARY]
-GO
-
-ALTER TABLE [dbo].[CRM_CustomerContact_Delta] ADD  DEFAULT (getdate()) FOR [Load_TS]
-GO
-
-
+create table dbo.crm_customercontactnotes_delta (
+    company_number      varchar(5)  not null,
+    customer_account    varchar(20) not null,
+    delivery_sequence   varchar(10) not null,
+    contact_type        varchar(4)  null,
+    contact_number      int         not null,
+    note_line           int         not null,
+    note_text           varchar(36),     -- matches DB2
+    row_hash            char(32),
+    load_ts             datetime2(3),
+    change_code         tinyint     not null   -- 1=Insert, 2=Delete, 3=Update
+);

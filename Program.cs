@@ -20,6 +20,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(fullConnection));
 
 builder.Services.AddControllers();
+builder.Services.AddResponseCompression();
 
 builder.Services.AddScoped<CsvExportService>();
 
@@ -27,12 +28,16 @@ builder.Services.AddScoped<ICustomerDeltaRepository<CRMCustomerDelta>, CustomerD
 
 builder.Services.AddScoped<ICustomerDeltaRepository<CRMCustomerContactDelta>, CustomerContactDeltaRepository>();
 
+builder.Services.AddScoped<ICustomerDeltaRepository<CRMCustomerContactNotesDelta>, CustomerContactNotesDeltaRepository>();
+
 builder.Services.Configure<SftpSettings>(
     builder.Configuration.GetSection("SftpSettings"));
 
 builder.Services.AddScoped<SftpService>();
 
 var app = builder.Build();
+
+app.UseResponseCompression();
 
 app.MapControllers();
 

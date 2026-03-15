@@ -1,8 +1,14 @@
+SELECT *
+FROM
+(
 SELECT
     T1.CONO1A AS company_number,
     RTRIM(TRIM(T1.TPAC1A)) AS customer_account,
     RTRIM(TRIM(T1.DSEQ1A)) AS delivery_sequence,
-    RTRIM(TRIM(T1.CTCT1A)) AS contact_type,
+    CASE
+        WHEN RTRIM(TRIM(T1.CTCT1A)) = '' THEN 'GEN'
+        ELSE RTRIM(TRIM(T1.CTCT1A))
+    END AS contact_type,
     T1.CTNU1A AS contact_number,
     RTRIM(TRIM(T1.CNTN1A)) AS contact_name,
     RTRIM(TRIM(T1.CNJT1A)) AS job_title,
@@ -29,12 +35,28 @@ SELECT
                 COALESCE(RTRIM(TRIM(T1.GTX21A)),'')
             )
         )
-    ) AS ROW_HASH,
+    ) AS row_hash,
+    CURRENT_TIMESTAMP AS load_ts,
 
-    CURRENT_TIMESTAMP AS LOAD_TS
+    ROW_NUMBER() OVER
+    (
+        PARTITION BY
+            T1.CONO1A,
+            T1.TPAC1A,
+            T1.DSEQ1A,
+            CASE
+                WHEN RTRIM(TRIM(T1.CTCT1A)) = '' THEN 'GEN'
+                ELSE RTRIM(TRIM(T1.CTCT1A))
+            END,
+            T1.CTNU1A
+        ORDER BY T1.CTNU1A
+    ) AS rn
 
 FROM EDUT1F3.T1P1A T1
 WHERE T1.CONO1A='GK'
 AND T1.GLCO1A='GK'
 AND T1.APPL1A='SL'
 AND T1.DSEQ1A='000'
+
+) X
+WHERE rn = 1

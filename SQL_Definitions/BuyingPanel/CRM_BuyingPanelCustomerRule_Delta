@@ -1,0 +1,14 @@
+CREATE TABLE dbo.CRM_BuyingPanelCustomerRule_Delta
+(
+company_number VARCHAR(5),
+customer_account VARCHAR(20),
+delivery_sequence VARCHAR(10),
+rule_number VARCHAR(10),
+
+rule_description VARCHAR(255),
+
+row_hash CHAR(32),
+load_ts DATETIME2(3),
+
+change_code TINYINT
+);
